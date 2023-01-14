@@ -1,0 +1,30 @@
+syntax = "proto3";
+option go_package = "./pdfcomposer;pdfcomposer";
+package pdfcomposer;
+
+service PdfCompose {
+  rpc UploadImage(stream UploadImageRequest) returns (stream UploadImageResponse) {};
+}
+
+message UploadImageRequest {
+  oneof data {
+    ImageInfo info = 1;
+    bytes chunk_data = 2;
+    int32 count = 3;
+    bool endFile = 4;
+  };
+}
+message ImageInfo {
+  string image_type = 2;
+}
+
+message UploadImageResponse {
+  oneof data {
+    UploadResult info = 1;
+    bytes chunk_data = 2;
+  };
+}
+message UploadResult{
+  bool Success = 1;
+  uint32 size = 2;
+}
