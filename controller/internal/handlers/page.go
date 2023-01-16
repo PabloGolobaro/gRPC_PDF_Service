@@ -9,6 +9,8 @@ import (
 	"net/http"
 )
 
+const topic = "notifications"
+
 type Handler struct {
 	HttpClient       *http.Client
 	PdfComposeCLient pdfcomposer.PdfComposeClient
@@ -44,6 +46,7 @@ func (h *Handler) Send(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	WriteToTopic(topic, "Got PDF file")
 	w.Write(bytes)
 
 	return

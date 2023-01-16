@@ -1,7 +1,7 @@
 #---Build stage---
 FROM golang AS builder
 COPY . /go/src/
-WORKDIR /go/src/cmd/service-pdf-compose-server
+WORKDIR /go/src/cmd/server
 
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags='-w -s' -o /go/bin/service
 

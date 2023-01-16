@@ -15,7 +15,7 @@ func Start(port string) {
 	r := chi.NewRouter()
 	httpClient := &http.Client{Timeout: time.Second * 5}
 	cwt, _ := context.WithTimeout(context.Background(), time.Second*5)
-	conn, err := grpc.DialContext(cwt, "localhost:50051", grpc.WithInsecure(), grpc.WithBlock())
+	conn, err := grpc.DialContext(cwt, "pdf-compose-service:50051", grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		panic(err)
 	}
